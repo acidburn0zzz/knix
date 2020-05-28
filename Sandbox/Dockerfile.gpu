@@ -21,10 +21,8 @@ RUN apt-get update --fix-missing
 RUN apt-get -y --no-install-recommends install build-essential
 RUN apt-get -y --no-install-recommends install netbase unzip file libmagic1
 
-# cudnn, opencv, dlib
-RUN apt-get -y --no-install-recommends install libsm6 libxrender1 libxrender-dev libxext6 libglib2.0-0 git cmake
-
-# Tensorflow-gpu
+# CUDA 10.1 dependencies and tools to build dlib 
+RUN apt-get -y --no-install-recommends install libsm6 libxrender1 libxrender-dev libxext6 libglib2.0-0 git cmake 
 RUN apt-get install -y --no-install-recommends libnvinfer6=6.0.1-1+cuda10.1 libnvinfer-dev=6.0.1-1+cuda10.1 libnvinfer-plugin6=6.0.1-1+cuda10.1
 
 # Python
@@ -45,21 +43,9 @@ RUN /usr/bin/python3 -m pip install fastcache
 # Needed for multi-language support (currently just Java)
 RUN /usr/bin/python3 -m pip install thriftpy2
 
-# Java (for queue service)
-RUN apt-get -y --no-install-recommends install openjdk-8-jdk-headless
+# Install compilers for dlib
 
-# Scikit
-RUN pip3 install scikit-build
-
-# Install compilers
-RUN apt install -y software-properties-common
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test
-RUN apt update -y; apt install -y gcc-6 g++-6
-
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 50
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 50
-
-#Install dlib 
+# Install dlib for CUDA
 RUN git clone https://github.com/davisking/dlib.git
 RUN mkdir -p /dlib/build
 
@@ -68,8 +54,12 @@ RUN cmake --build /dlib/build
 
 RUN cd /dlib; python3 /dlib/setup.py install
 
-# Install the face recognition package
-# RUN pip3 install face_recognition
+# Install the face recognition package and tensorflow
+RUN pip3 install face_recognition
+RUN pip3 install tensorflow==2.1.0
+
+# Java (for queue service)
+RUN apt-get -y --no-install-recommends install openjdk-8-jdk-headless
 
 # Add components (as mfn)
 RUN groupadd -o -g 1000 -r mfn && useradd -d /opt/mfn -u 1000 -m -r -g mfn mfn
@@ -80,15 +70,6 @@ ADD frontend/frontend /opt/mfn/frontend
 ADD build/SandboxAgent.tar.gz /opt/mfn/
 ADD build/FunctionWorker.tar.gz /opt/mfn/
 ADD build/LoggingService.tar.gz /opt/mfn/
-
-# Fix protobuf
-#RUN mkdir -p /sand/pbfix
-#ADD riak_dt_pb2.py /sand/pbfix
-#ADD riak_pb2.py /sand/pbfix
-#ADD riak_kv_pb2.py /sand/pbfix
-#ADD riak_search_pb2.py /sand/pbfix
-#ADD riak_ts_pb2.py /sand/pbfix
-#ADD riak_yokozuna_pb2.py /sand/pbfix/
 
 RUN chown mfn:mfn -R /opt/mfn
 USER mfn
