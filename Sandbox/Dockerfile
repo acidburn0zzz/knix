@@ -43,8 +43,6 @@ RUN /usr/bin/python3 -m pip install fastcache
 # Needed for multi-language support (currently just Java)
 RUN /usr/bin/python3 -m pip install thriftpy2
 
-# Install compilers for dlib
-
 # Install dlib for CUDA
 RUN git clone https://github.com/davisking/dlib.git
 RUN mkdir -p /dlib/build

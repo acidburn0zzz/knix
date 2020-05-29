@@ -27,12 +27,10 @@ class TensorFlowTest(unittest.TestCase):
     def test_tensorflow(self):
         """  testing tensorflow """
 
-        inp0 = '{"chain_test": "aabbcc"}'
-        res0 = '{"chain_test": "aabbcc", "functionName": "ChainTask.py"}'
-        inp1 = '"aabbcc"'
-        res1 = '"aabbcc ChainTask.py"'
+        inp1 = '"abc"'
+        res1 = '"Hello from Tensorflow 2.1.0"'
 
-        testtuplelist =[(inp0, res0), (inp1, res1)]
+        testtuplelist =[(inp1, res1)]
 
         test = MFNTest(test_name = "Tensorflow__Test")
         test.exec_tests(testtuplelist)

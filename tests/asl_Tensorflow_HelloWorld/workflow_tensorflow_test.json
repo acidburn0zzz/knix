@@ -1,9 +1,9 @@
 {
     "Comment": "Tensorflow State Machine Example",
-    "StartAt": "tensorflow",
+    "StartAt": "tensorf",
     "States": {
-            "tensorflow":{
-              "Resource":"tensorflow",
+            "tensorf":{
+              "Resource":"tensorf",
               "Type":"Task",
               "End":true 
             }
