@@ -1,4 +1,5 @@
 #   Copyright 2020 The KNIX Authors
+
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -11,29 +12,23 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+#import json 
 
-import unittest
-import os, sys
-import json
+#import os
+#content = ""
 
-sys.path.append("../")
-from mfn_test_utils import MFNTest
+#try:
+#    curdir = os.path.dirname(__file__)
+#    print("function's current directory: " + curdir)
 
-class TensorFlowTest(unittest.TestCase):
+def handle(event, context):
+    import os
+    curdir = os.path.dirname(__file__)
 
-    """ Example ASL state test with Tensorflow
-
-    """
-    def test_tensorflow(self):
-        """  testing tensorflow """
-
-        inp1 = '"abc"'
-        #res1 = '"Hello from Tensorflow 2.1.0"'
-
-        res1 = '"GPU available: True"'
-
-        testtuplelist =[(inp1, res1)]
-
-        test = MFNTest(test_name = "Tensorflow__Test")
-        test.exec_tests(testtuplelist)
+    # Simple hello world using Face_Recognition
+    import face_recognition
+    image = face_recognition.load_image_file("/opt/mfn/workflow/states/tensorf/facer/obama.jpg")
+    face_locations = face_recognition.face_locations(image)    
+    return str(face_locations)#str(face_recognition.__version__)
+    #return "Hello Face!"
 

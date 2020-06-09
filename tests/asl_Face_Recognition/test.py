@@ -19,21 +19,20 @@ import json
 sys.path.append("../")
 from mfn_test_utils import MFNTest
 
-class TensorFlowTest(unittest.TestCase):
+class FaceRecognitionTest(unittest.TestCase):
 
-    """ Example ASL state test with Tensorflow
+    """ Example ASL state test with face_recognition
 
     """
     def test_tensorflow(self):
-        """  testing tensorflow """
+        """  testing face_recognition """
 
         inp1 = '"abc"'
-        #res1 = '"Hello from Tensorflow 2.1.0"'
 
-        res1 = '"GPU available: True"'
-
+        #res1 = '"1.2.3"' # version number
+        res1 = '"[(68, 497, 175, 390)]"'
         testtuplelist =[(inp1, res1)]
 
-        test = MFNTest(test_name = "Tensorflow__Test")
+        test = MFNTest(test_name = "FaceRecognition__Test")
         test.exec_tests(testtuplelist)
 

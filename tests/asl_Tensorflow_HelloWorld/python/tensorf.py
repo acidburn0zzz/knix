@@ -21,4 +21,7 @@ def handle(event, context):
     x = [[2.]]
     print('tensorflow version', tf.__version__)
     print('hello, {}'.format(tf.matmul(x, x)))
-    return "Hello from Tensorflow " + str(tf.__version__)
+    #return "Hello from Tensorflow " + str(tf.__version__)
+    #return "GPU available: " + str(tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None))
+    return "GPU available: " + str(tf.test.is_built_with_cuda())
+
