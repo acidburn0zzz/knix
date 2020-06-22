@@ -15,6 +15,7 @@
 import unittest
 import os, sys
 import json
+#import time
 
 sys.path.append("../")
 from mfn_test_utils import MFNTest
@@ -34,5 +35,6 @@ class FaceRecognitionTest(unittest.TestCase):
         testtuplelist =[(inp1, res1)]
 
         test = MFNTest(test_name = "FaceRecognition__Test")
+        #time.sleep(10) # wait for deployment
         test.exec_tests(testtuplelist)
 

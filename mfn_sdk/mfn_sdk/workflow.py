@@ -272,15 +272,20 @@ class Workflow(object):
         #    self.deploy(-1)
         if self._status != "deployed":
             raise Exception("Workflow not deployed: " + self.name)
-
+        #while True:
         # we are already deployed and have the endpoints stored in self._endpoints
         url = random.choice(self._endpoints)
         try:
+            #a = requests.adapters.HTTPAdapter(max_retries=3)
+            #b = requests.adapters.HTTPAdapter(max_retries=3)
+            #time.sleep(5)
             #postdata = {}
             #postdata["value"] = json.dumps(data)
             #postdata = json.dumps(postdata)
             if check_duration:
                 t_start = time.time()
+            #self.client._s.mount('http://', a)
+            #self.client._s.mount('https://', b)
             r = self.client._s.post(url,
                 params={},
                 json=data,
@@ -289,6 +294,7 @@ class Workflow(object):
                 #headers={'Content-Type':'application/x-www-form-urlencoded'},
                 #data=postdata,
                 timeout=timeout)
+            #break
             if check_duration:
                 t_total = (time.time() - t_start) * 1000.0
         except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout) as e:
