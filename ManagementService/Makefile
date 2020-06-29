@@ -56,10 +56,10 @@ include ../docker.mk
 image: \
 	Dockerfile \
 	management_deployment_package.tar.gz
-	$(call build_image,Dockerfile,microfn/management)
+	$(call build_image,Dockerfile,$(MANAGER_IMAGE_NAME))
 
 push: image
-	$(call push_image,microfn/management)
+	$(call push_image,$(MANAGER_IMAGE_NAME))
 
 test: image
 	docker run -it --rm --name management \

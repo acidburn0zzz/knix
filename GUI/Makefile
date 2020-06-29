@@ -15,6 +15,7 @@
 SHELL := /bin/bash
 -include ../proxy.mk
 include ../docker.mk
+include ../build_env.mk
 
 default: app/pages/docs/sdk/cli.md \
 	app/pages/docs/sdk/sdk.md \
@@ -48,7 +49,7 @@ image:	app/pages/docs/sdk/cli.md \
 	app/pages/docs/sdk/sdk.md \
 	app/pages/docs/api/javadoc/index.html \
 	app/pages/docs/api/python/MicroFunctionsAPI.html
-	$(call build_image,Dockerfile,microfn/nginx)
+	$(call build_image,Dockerfile,$(NGINX_IMAGE_NAME))
 
 push: image
-	$(call push_image,microfn/nginx)
+	$(call push_image,$(NGINX_IMAGE_NAME))

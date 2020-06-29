@@ -80,7 +80,7 @@ include ../docker.mk
 image: \
 	Dockerfile \
 	target/datalayerservice.jar
-	$(call build_image,Dockerfile,microfn/datalayer)
+	$(call build_image,Dockerfile,$(DATALAYER_IMAGE_NAME))
 
 push: image
-	$(call push_image,microfn/datalayer)
+	$(call push_image,$(DATALAYER_IMAGE_NAME))

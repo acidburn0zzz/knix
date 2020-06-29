@@ -15,6 +15,7 @@
 # Makefile
 SHELL := /bin/bash
 -include ../proxy.mk
+include ../build_env.mk
 
 default: image
 
@@ -31,7 +32,7 @@ image: Dockerfile-riak \
 		src/mfn_counter_triggers.erl \
 		src/workflow_triggers.erl \
 		$(shell find script/ -type f)
-	$(call build_image,Dockerfile-riak,microfn/riak)
+	$(call build_image,Dockerfile-riak,$(RIAK_IMAGE_NAME))
 
 push: image
-	$(call push_image,microfn/riak)
+	$(call push_image,$(RIAK_IMAGE_NAME))

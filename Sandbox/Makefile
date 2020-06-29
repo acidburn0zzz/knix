@@ -89,7 +89,7 @@ image: \
 	build/LoggingService.tar.gz \
 	build/FunctionWorker.tar.gz \
 	build/SandboxAgent.tar.gz
-	$(call build_image,Dockerfile,microfn/sandbox)
+	$(call build_image,Dockerfile,$(SANDBOX_IMAGE_NAME))
 
 image_java: \
 	Dockerfile_java \
@@ -99,11 +99,11 @@ image_java: \
 	build/JavaRequestHandler.tar.gz \
 	build/FunctionWorker.tar.gz \
 	build/SandboxAgent.tar.gz
-	$(call build_image,Dockerfile_java,microfn/sandbox_java)
+	$(call build_image,Dockerfile_java,$(SANDBOX_JAVA_IMAGE_NAME))
 
 push: image image_java
-	$(call push_image,microfn/sandbox)
-	$(call push_image,microfn/sandbox_java)
+	$(call push_image,$(SANDBOX_IMAGE_NAME))
+	$(call push_image,$(SANDBOX_JAVA_IMAGE_NAME))
 
 
 ##############################
