@@ -12,16 +12,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+shell := /bin/bash
+
 THRIFT_IMAGE_NAME=thrift
 THRIFT_VERSION=0.13
 MVN_LIBTHRIFT_VERSION=0.13.0
 
 # Kubernetes environment custom image names
-KUBERNETES_CUSTOM_PREFIX =
+KUBERNETES_IMAGE_PREFIX =
 
-SANDBOX_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/sandbox
-SANDBOX_JAVA_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/sandbox_java
-RIAK_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/riak
-DATALAYER_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/datalayer
-MANAGER_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/management
-NGINX_IMAGE_NAME = $(KUBERNETES_CUSTOM_PREFIX)microfn/nginx
+SANDBOX_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/sandbox
+SANDBOX_JAVA_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/sandbox_java
+RIAK_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/riak
+DATALAYER_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/datalayer
+MANAGER_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/management
+NGINX_IMAGE_NAME = $(KUBERNETES_IMAGE_PREFIX)microfn/nginx
